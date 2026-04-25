@@ -49,7 +49,12 @@ resource "google_compute_instance" "server" {
   allow_stopping_for_update = true
 
   lifecycle {
-    ignore_changes = [metadata_startup_script, boot_disk[0].initialize_params[0].size]
+    # Ignore out-of-band IP rotations (gcloud delete-access-config / add-access-config).
+    ignore_changes = [
+      metadata_startup_script,
+      boot_disk[0].initialize_params[0].size,
+      network_interface[0].access_config,
+    ]
   }
 
   depends_on = [

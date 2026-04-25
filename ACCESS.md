@@ -6,7 +6,7 @@ Hosted on GCP (`legalize-server-26042598`), Sao Paulo region.
 ## Login
 
 ```sh
-ssh dev@34.39.246.254
+ssh dev@<server-ip>     # IP sent separately
 ```
 
 That's it. Public-key auth only — no password. If your key is in the server's
@@ -68,7 +68,7 @@ cd ~/legalize-pipeline && codex --dangerously-bypass-approvals-and-sandbox
 - Server has a **public IP** but only port 22 (SSH) is open to the world. No
   HTTP/HTTPS exposed — if you need to expose a web service, ask the admin to
   open the port or use an SSH tunnel:
-  `ssh -NL 8080:localhost:8080 dev@34.39.246.254`
+  `ssh -NL 8080:localhost:8080 dev@<server-ip>`
 - All work as the **`dev`** user. `sudo` works passwordless if you need it.
 - Be considerate with disk usage — only 60 GB total. `df -h` to check.
 - Cost-aware: the box is always on. Tell the admin if you'd like it stopped
