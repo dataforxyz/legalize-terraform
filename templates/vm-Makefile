@@ -1,0 +1,27 @@
+.PHONY: help claude codex logs ps status
+
+APP_DIR := $(HOME)/legalize-pipeline
+
+help: ## Show this help
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
+
+# --- AI tools ---
+
+claude: ## Launch Claude Code in legalize-pipeline repo
+	tmux new-session -As claude -c $(APP_DIR) "claude --dangerously-skip-permissions"
+
+codex: ## Launch Codex CLI in legalize-pipeline repo
+	tmux new-session -As codex -c $(APP_DIR) "codex --dangerously-bypass-approvals-and-sandbox"
+
+# --- Status ---
+
+logs: ## Tail startup log
+	sudo tail -f /var/log/legalize-startup.log
+
+ps: ## Show running docker containers
+	@docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" 2>/dev/null || echo "  (none)"
+
+status: ## Show last 20 lines of startup log
+	sudo tail -20 /var/log/legalize-startup.log
+
+.DEFAULT_GOAL := help

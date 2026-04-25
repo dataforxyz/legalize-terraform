@@ -1,0 +1,37 @@
+# --------------------------------------------------------------------------
+# Legalize Server — Example Variable Values
+# --------------------------------------------------------------------------
+# Copy this file to terraform.tfvars and fill in your values.
+# --------------------------------------------------------------------------
+
+# ── GCP Project (required) ───────────────────────────────────────────────
+
+project_id      = "legalize-server-XXXXX"             # must be globally unique
+billing_account = "XXXXXX-XXXXXX-XXXXXX"              # your GCP billing account ID
+
+# org_id        = "564163886903"                      # default: same org as other projects
+# project_name  = "legalize-server"
+
+# ── Region ───────────────────────────────────────────────────────────────
+
+# region = "southamerica-east1"                       # default (Sao Paulo)
+# zone   = "southamerica-east1-a"
+
+# ── Compute ──────────────────────────────────────────────────────────────
+
+# machine_type      = "e2-small"                      # default: 2 shared vCPU, 2 GB RAM
+# boot_disk_size_gb = 30
+
+# ── AI Tools ─────────────────────────────────────────────────────────────
+
+# anthropic_api_key = "sk-ant-..."                    # for Claude Code on VM
+# openai_api_key    = "sk-..."                        # for Codex CLI on VM
+
+# ── Git ──────────────────────────────────────────────────────────────────
+
+# legalize_repo_url = "https://github.com/jaredgoldman/legalize-pipeline.git"
+# git_branch        = "feat/mx-scaffold"
+
+# ── Dev User ─────────────────────────────────────────────────────────────
+
+# dev_username = "dev"
