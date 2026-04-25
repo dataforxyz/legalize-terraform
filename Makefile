@@ -11,11 +11,11 @@ SSH_USER := dev
 VM_IP    := $(or $(VM_IP),$(shell terraform output -raw public_ip 2>/dev/null))
 export CLOUDSDK_PYTHON_SITEPACKAGES := 1
 
-# ── Transport: auto-pick gcloud IAP vs plain ssh ─────────────────────────
-# Override with `make ... TRANSPORT=ssh` or `TRANSPORT=gcloud`.
-# gcloud mode = admin (manages infra). ssh mode = anyone with an authorized key.
+# ── Transport: default to plain ssh (key-based auth) ─────────────────────
+# Override with `make ... TRANSPORT=gcloud` to use gcloud + IAP tunnel.
+# ssh mode works for anyone with an authorized key in `ssh_authorized_keys`.
 
-TRANSPORT ?= $(if $(shell command -v gcloud 2>/dev/null),gcloud,ssh)
+TRANSPORT ?= ssh
 
 ifeq ($(TRANSPORT),gcloud)
   SSH_RUN  = gcloud compute ssh $(VM_NAME) --zone=$(ZONE) --project=$(PROJECT) --tunnel-through-iap --command
